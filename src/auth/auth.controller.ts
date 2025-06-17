@@ -10,10 +10,13 @@ export class AuthController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
+<<<<<<< HEAD
 
   @UseGuards(AuthGuard('jwt'))
   @Post('profile')
   getProfile(@Request() req) {
     return req.user;
   }
+=======
+>>>>>>> 55ffc831683bf2564d224751968cc4bed2e20c6c
 }

@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   /**
    * This is the function you are asking about.
@@ -31,8 +31,14 @@ export class AuthService {
    */
   async login(user: any) {
     const payload = { email: user.email, sub: user.id };
-    return {
-      access_token: this.jwtService.sign(payload),
+    const accessToken = this.jwtService.sign(payload);
+    const refreshToken = this.jwtService.sign(payload, {
+      secret: process.env.JWT_REFRESH_SECRET!,
+      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN!,
+    });
+     return {
+      access_token: accessToken,
+      refresh_token: refreshToken,
     };
   }
 }

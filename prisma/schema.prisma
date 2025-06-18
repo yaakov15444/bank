@@ -11,8 +11,8 @@ model User {
   email     String   @unique
   password  String
   name      String?
+  hashedRefreshToken String?
   accounts  BankAccount[] // Relation: A user can have many bank accounts
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

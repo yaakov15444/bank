@@ -3,7 +3,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
-
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
@@ -36,7 +36,10 @@ export class AuthService {
       secret: process.env.JWT_REFRESH_SECRET!,
       expiresIn: process.env.JWT_REFRESH_EXPIRES_IN!,
     });
-     return {
+    const salt = await bcrypt.genSalt();
+    const hashedRefreshToken = await bcrypt.hash(refreshToken, salt);
+    await this.userService.setRefreshToken(user.id, hashedRefreshToken);
+    return {
       access_token: accessToken,
       refresh_token: refreshToken,
     };

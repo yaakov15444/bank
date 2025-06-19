@@ -4,7 +4,7 @@ import { AppError } from 'src/common/AppError';
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
   async createUser(data: { name: string; email: string; password: string }) {
     try {
       const salt = await bcrypt.genSalt();
@@ -43,5 +43,15 @@ export class UserService {
 
     // 4. If no user is found, or passwords don't match, return null
     return null;
+  }
+  async setRefreshToken(userId: number, refreshToken: string) {
+    await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        hashedRefreshToken: refreshToken,
+      },
+    });
   }
 }

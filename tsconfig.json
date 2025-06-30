@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2023",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    /* Language and Environment */
+    "target": "ES2020",                                  // Compile to a modern version of JavaScript
+
+    /* Modules */
+    "module": "commonjs",                                // Use the standard Node.js module system
+    "rootDir": "./src",                                  // Where our source TypeScript files will live
+
+    /* Emitting */
+    "outDir": "./dist",                                  // Where the compiled JavaScript will go
+
+    /* Interop Constraints */
+    "esModuleInterop": true,                             // Allows better compatibility between module systems
+    "forceConsistentCasingInFileNames": true,            // Prevents case-sensitivity issues
+
+    /* Type Checking */
+    "strict": true,                                      // Enables all strict type-checking options
+    "skipLibCheck": true                                 // Skip type checking of declaration files
   }
 }

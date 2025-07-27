@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
     groupId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Group'
+    },
+    isActive: {
+        type: Boolean,
+        default: true
     }
 },
     {

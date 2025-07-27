@@ -1,5 +1,7 @@
 import express from "express";
 import connectToMongo from "./src/db/connectToMongo.js";
+import errorHandler from "./src/middlewares/errorHandler.js";
+import router from "./src/routers/userRoute.js";
 connectToMongo();
 const app = express();
 app.use(express.json());
@@ -12,5 +14,7 @@ app.use((req, res, next) => {
     ); 
 
     next();
-});;
+});
+app.use("/api", router);
+app.use(errorHandler);
 app.listen(3000, () => console.log("Server is running on port 3000"));

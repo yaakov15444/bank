@@ -1,14 +1,14 @@
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
-
+import AppError from "../utils/AppError.js";
 export const registerUser = async (user) => {
         const { name, email, password } = user;
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-                return res.status(400).json({ message: "User already exists" });
+                throw new AppError("User already exists", 400);
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ name, email, password: hashedPassword });
-        await user.save();
-        res.status(201).json({ message: "User registered successfully" });
+        const newUser  = new User({ name, email, password: hashedPassword });
+        await newUser .save();
+        return { message: "User registered successfully" , user: newUser };
 };

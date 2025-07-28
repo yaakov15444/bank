@@ -4,10 +4,25 @@ const groupSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
+    joinCode: {
+        type: String,
+        unique: true,
+        required: true,
+    },
+    admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true, 
+    },
+    users: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
 },
     {
         timestamps: true
     }
 );
-export const Group = mongoose.model('Group', groupSchema);
+export default  mongoose.model('Group', groupSchema);

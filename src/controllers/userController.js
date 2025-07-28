@@ -1,11 +1,11 @@
 import {registerUser, loginUser} from "../services/userService.js";
-
+import AppError from "../utils/AppError.js";
 export const register = async (req, res) => {
     try {
         const user = await registerUser(req.body);
         res.status(201).json(user);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+       next(new AppError(error.message, 400));
     }
 };
 export const login = async (req, res) => {
@@ -13,7 +13,7 @@ export const login = async (req, res) => {
         const user = await loginUser(req.body.email, req.body.password);
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(new AppError(error.message, 400));
     }
 };
 

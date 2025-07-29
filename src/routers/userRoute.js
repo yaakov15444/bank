@@ -4,13 +4,13 @@ import {protect} from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 /**
- * @route   POST /api/users/register
+ * @route   POST /api/users/
  * @desc    Register a new user
  * @access  Public
  * @body    { name: string, email: string, password: string }
  * @returns { message: string, user?: object }
  */
-router.post("/register",register);
+router.post("/",register);
 
 /**
  * @route   POST /api/users/login

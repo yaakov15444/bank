@@ -10,3 +10,12 @@ export const createGroup = async (group) => {
     await newGroup.save();
     return { message: "Group created successfully", group: newGroup };
 };
+export const getUserGroups = async (userId) => {
+    const groups = await Group.find({
+        $or: [
+            { admin: userId },
+            { users: userId }
+        ]
+    });
+    return groups;
+};

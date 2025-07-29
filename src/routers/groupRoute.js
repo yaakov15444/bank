@@ -1,5 +1,5 @@
 import express from "express";
-import { createGroupctrl , getMyGroups} from "../controllers/groupController.js";
+import { createGroupctrl , getMyGroups, joinGroupByEmailCtrl} from "../controllers/groupController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 router.use(protect);
@@ -17,4 +17,12 @@ router.post("/", createGroupctrl);
  * @desc     Get all groups that the user is a member of
  */
 router.get("/", getMyGroups);
+
+/**
+ * @function joinGroupByEmail
+ * @route   POST /api/groups/join
+ * @desc     Join a group by email
+ * @body    { groupId: string, userEmail: string }
+ */
+router.post("/join", joinGroupByEmailCtrl);
 export default router;

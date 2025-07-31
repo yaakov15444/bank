@@ -1,7 +1,7 @@
 import { createGroup, getUserGroups ,joinGroupByEmail} from "../services/groupService.js";
 import AppError from "../utils/AppError.js";
 import generateJoinCode from "../utils/generateJoinCode.js";
-export const createGroupctrl = async (req, res) => {
+export const createGroupctrl = async (req, res,next) => {
     try { 
         const joinCode = generateJoinCode();
         const userId = req.user._id;
@@ -11,7 +11,7 @@ export const createGroupctrl = async (req, res) => {
         next(new AppError(error.message, 400));
     }
 };
-export const getMyGroups = async (req, res) => {
+export const getMyGroups = async (req, res,next) => {
     try {
         const groups = await getUserGroups(req.user._id);
         res.status(200).json(groups);
@@ -19,7 +19,7 @@ export const getMyGroups = async (req, res) => {
         next(new AppError(error.message, 400));
     }
 };
-export const joinGroupByEmailCtrl = async (req, res) => {
+export const joinGroupByEmailCtrl = async (req, res,next) => {
     try {
         const { groupId, userEmail } = req.body;
         const result = await joinGroupByEmail(groupId, userEmail);
